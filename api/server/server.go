@@ -5,20 +5,25 @@ import (
 	"log"
 	"net"
 
-	"github.com/watchlist-kata/media/api" // Импортируйте ваши модели из api/media.proto
+	"github.com/watchlist-kata/media/api"
 	"github.com/watchlist-kata/media/internal/service"
 	"google.golang.org/grpc"
+	"log/slog"
 )
 
 // MediaServer представляет собой структуру для реализации gRPC сервиса
 type MediaServer struct {
-	api.UnimplementedMediaServiceServer                  // Встраиваем автоматически сгенерированный интерфейс
-	svc                                 *service.Service // Ссылка на сервис
+	api.UnimplementedMediaServiceServer
+	svc    *service.Service
+	Logger *slog.Logger
 }
 
 // NewMediaServer создает новый экземпляр MediaServer
-func NewMediaServer(svc *service.Service) *MediaServer {
-	return &MediaServer{svc: svc}
+func NewMediaServer(svc *service.Service, logger *slog.Logger) *MediaServer {
+	return &MediaServer{
+		svc:    svc,
+		Logger: logger,
+	}
 }
 
 // SaveMedia реализует метод SaveMedia из интерфейса MediaServiceServer
@@ -26,14 +31,16 @@ func (s *MediaServer) SaveMedia(ctx context.Context, req *api.SaveMediaRequest) 
 	// Проверяем, не был ли отменен контекст
 	select {
 	case <-ctx.Done():
-		log.Println("Context cancelled")
+		s.Logger.WarnContext(ctx, "Context cancelled")
 		return nil, ctx.Err() // Возвращаем ошибку отмены
 	default:
 		// Продолжаем выполнение, если контекст не был отменен
 	}
 
+	s.Logger.InfoContext(ctx, "SaveMedia called", "tmdbID", req.Media.TmdbId)
 	media, err := s.svc.SaveMedia(req) // Передаём req
 	if err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to SaveMedia", "tmdbID", req.Media.TmdbId, "error", err)
 		return nil, err
 	}
 	return media, nil
@@ -44,14 +51,16 @@ func (s *MediaServer) GetMediaByID(ctx context.Context, req *api.GetMediaRequest
 	// Проверяем, не был ли отменен контекст
 	select {
 	case <-ctx.Done():
-		log.Println("Context cancelled")
+		s.Logger.WarnContext(ctx, "Context cancelled")
 		return nil, ctx.Err() // Возвращаем ошибку отмены
 	default:
 		// Продолжаем выполнение, если контекст не был отменен
 	}
 
+	s.Logger.InfoContext(ctx, "GetMediaByID called", "mediaID", req.Id)
 	media, err := s.svc.GetMediaByID(req)
 	if err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to GetMediaByID", "mediaID", req.Id, "error", err)
 		return nil, err
 	}
 	return media, nil
@@ -62,14 +71,16 @@ func (s *MediaServer) GetMediasByName(ctx context.Context, req *api.GetMediaRequ
 	// Проверяем, не был ли отменен контекст
 	select {
 	case <-ctx.Done():
-		log.Println("Context cancelled")
+		s.Logger.WarnContext(ctx, "Context cancelled")
 		return nil, ctx.Err() // Возвращаем ошибку отмены
 	default:
 		// Продолжаем выполнение, если контекст не был отменен
 	}
 
+	s.Logger.InfoContext(ctx, "GetMediasByName called", "name", req.Name)
 	mediaList, err := s.svc.GetMediasByName(req)
 	if err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to GetMediasByName", "name", req.Name, "error", err)
 		return nil, err
 	}
 	return mediaList, nil
@@ -80,14 +91,15 @@ func (s *MediaServer) UpdateMedia(ctx context.Context, req *api.SaveMediaRequest
 	// Проверяем, не был ли отменен контекст
 	select {
 	case <-ctx.Done():
-		log.Println("Context cancelled")
+		s.Logger.WarnContext(ctx, "Context cancelled")
 		return nil, ctx.Err() // Возвращаем ошибку отмены
 	default:
 		// Продолжаем выполнение, если контекст не был отменен
 	}
-
+	s.Logger.InfoContext(ctx, "UpdateMedia called", "tmdbID", req.Media.TmdbId)
 	media, err := s.svc.UpdateMedia(req.Media)
 	if err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to UpdateMedia", "tmdbID", req.Media.TmdbId, "error", err)
 		return nil, err
 	}
 	return media, nil
@@ -101,7 +113,7 @@ func StartGRPCServer(port string, svc *service.Service) {
 	}
 
 	grpcServer := grpc.NewServer()
-	api.RegisterMediaServiceServer(grpcServer, NewMediaServer(svc))
+	api.RegisterMediaServiceServer(grpcServer, NewMediaServer(svc, svc.Logger))
 
 	log.Printf("gRPC server listening on %s", port)
 	if err := grpcServer.Serve(listener); err != nil {
