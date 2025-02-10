@@ -6,17 +6,17 @@ import (
 
 	"github.com/watchlist-kata/media/api/server"
 	"github.com/watchlist-kata/media/internal/config"
-	"github.com/watchlist-kata/media/internal/repository"
+	"github.com/watchlist-kata/media/internal/repository/postgres"
 	"github.com/watchlist-kata/media/internal/service"
 	"github.com/watchlist-kata/media/pkg/logger"
-	"gorm.io/driver/postgres"
+	pg "gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func main() {
 	cfg, err := config.LoadConfig()
 	if err != nil {
-		log.Fatalf("Failed to load config: %v", err)
+		log.Fatalf("Failed to load config: %v", fmt.Errorf("failed to load configuration: %w", err))
 	}
 
 	// Инициализируем логгер
@@ -27,7 +27,7 @@ func main() {
 		cfg.LogBufferSize,
 	)
 	if err != nil {
-		log.Fatalf("Failed to initialize logger: %v", err)
+		log.Fatalf("Failed to initialize logger: %v", fmt.Errorf("failed to initialize logger: %w", err))
 	}
 	defer func() {
 		if multiHandler, ok := customLogger.Handler().(*logger.MultiHandler); ok {
@@ -40,17 +40,17 @@ func main() {
 	// Подключаемся к базе данных
 	dsn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=%s password=%s",
 		cfg.DBHost, cfg.DBPort, cfg.DBUser, cfg.DBName, cfg.DBSSLMode, cfg.DBPassword)
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(pg.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Fatalf("Failed to connect to database: %v", err)
+		log.Fatalf("Failed to connect to database: %v", fmt.Errorf("failed to connect to database: %w", err))
 	}
 
 	// Инициализируем репозиторий
-	repo := repository.NewRepository(db, customLogger)
+	repo := postgres.NewPostgresRepository(db, customLogger)
 
 	// Инициализируем сервис
-	svc := service.NewService(repo, customLogger)
+	svc := service.NewMediaService(repo, customLogger)
 
 	// Запускаем gRPC-сервер
-	server.StartGRPCServer(cfg.GRPCPort, svc)
+	server.StartGRPCServer(cfg.GRPCPort, svc, customLogger)
 }

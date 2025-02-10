@@ -31,6 +31,7 @@ const (
 	MediaService_GetMediasByName_FullMethodName = "/media.MediaService/GetMediasByName"
 	MediaService_SaveMedia_FullMethodName       = "/media.MediaService/SaveMedia"
 	MediaService_UpdateMedia_FullMethodName     = "/media.MediaService/UpdateMedia"
+	MediaService_SearchTMDB_FullMethodName      = "/media.MediaService/SearchTMDB"
 )
 
 // MediaServiceClient is the client API for MediaService service.
@@ -39,10 +40,11 @@ const (
 //
 // Сервис медиа
 type MediaServiceClient interface {
-	GetMediaByID(ctx context.Context, in *GetMediaRequest, opts ...grpc.CallOption) (*Media, error)
-	GetMediasByName(ctx context.Context, in *GetMediaRequest, opts ...grpc.CallOption) (*MediaList, error)
+	GetMediaByID(ctx context.Context, in *GetMediaByIDRequest, opts ...grpc.CallOption) (*Media, error)
+	GetMediasByName(ctx context.Context, in *GetMediasByNameRequest, opts ...grpc.CallOption) (*MediaList, error)
 	SaveMedia(ctx context.Context, in *SaveMediaRequest, opts ...grpc.CallOption) (*Media, error)
 	UpdateMedia(ctx context.Context, in *SaveMediaRequest, opts ...grpc.CallOption) (*Media, error)
+	SearchTMDB(ctx context.Context, in *SearchTMDBRequest, opts ...grpc.CallOption) (*SearchTMDBResponse, error)
 }
 
 type mediaServiceClient struct {
@@ -53,7 +55,7 @@ func NewMediaServiceClient(cc grpc.ClientConnInterface) MediaServiceClient {
 	return &mediaServiceClient{cc}
 }
 
-func (c *mediaServiceClient) GetMediaByID(ctx context.Context, in *GetMediaRequest, opts ...grpc.CallOption) (*Media, error) {
+func (c *mediaServiceClient) GetMediaByID(ctx context.Context, in *GetMediaByIDRequest, opts ...grpc.CallOption) (*Media, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Media)
 	err := c.cc.Invoke(ctx, MediaService_GetMediaByID_FullMethodName, in, out, cOpts...)
@@ -63,7 +65,7 @@ func (c *mediaServiceClient) GetMediaByID(ctx context.Context, in *GetMediaReque
 	return out, nil
 }
 
-func (c *mediaServiceClient) GetMediasByName(ctx context.Context, in *GetMediaRequest, opts ...grpc.CallOption) (*MediaList, error) {
+func (c *mediaServiceClient) GetMediasByName(ctx context.Context, in *GetMediasByNameRequest, opts ...grpc.CallOption) (*MediaList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MediaList)
 	err := c.cc.Invoke(ctx, MediaService_GetMediasByName_FullMethodName, in, out, cOpts...)
@@ -93,16 +95,27 @@ func (c *mediaServiceClient) UpdateMedia(ctx context.Context, in *SaveMediaReque
 	return out, nil
 }
 
+func (c *mediaServiceClient) SearchTMDB(ctx context.Context, in *SearchTMDBRequest, opts ...grpc.CallOption) (*SearchTMDBResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SearchTMDBResponse)
+	err := c.cc.Invoke(ctx, MediaService_SearchTMDB_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MediaServiceServer is the server API for MediaService service.
 // All implementations must embed UnimplementedMediaServiceServer
 // for forward compatibility.
 //
 // Сервис медиа
 type MediaServiceServer interface {
-	GetMediaByID(context.Context, *GetMediaRequest) (*Media, error)
-	GetMediasByName(context.Context, *GetMediaRequest) (*MediaList, error)
+	GetMediaByID(context.Context, *GetMediaByIDRequest) (*Media, error)
+	GetMediasByName(context.Context, *GetMediasByNameRequest) (*MediaList, error)
 	SaveMedia(context.Context, *SaveMediaRequest) (*Media, error)
 	UpdateMedia(context.Context, *SaveMediaRequest) (*Media, error)
+	SearchTMDB(context.Context, *SearchTMDBRequest) (*SearchTMDBResponse, error)
 	mustEmbedUnimplementedMediaServiceServer()
 }
 
@@ -113,10 +126,10 @@ type MediaServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMediaServiceServer struct{}
 
-func (UnimplementedMediaServiceServer) GetMediaByID(context.Context, *GetMediaRequest) (*Media, error) {
+func (UnimplementedMediaServiceServer) GetMediaByID(context.Context, *GetMediaByIDRequest) (*Media, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMediaByID not implemented")
 }
-func (UnimplementedMediaServiceServer) GetMediasByName(context.Context, *GetMediaRequest) (*MediaList, error) {
+func (UnimplementedMediaServiceServer) GetMediasByName(context.Context, *GetMediasByNameRequest) (*MediaList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMediasByName not implemented")
 }
 func (UnimplementedMediaServiceServer) SaveMedia(context.Context, *SaveMediaRequest) (*Media, error) {
@@ -124,6 +137,9 @@ func (UnimplementedMediaServiceServer) SaveMedia(context.Context, *SaveMediaRequ
 }
 func (UnimplementedMediaServiceServer) UpdateMedia(context.Context, *SaveMediaRequest) (*Media, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMedia not implemented")
+}
+func (UnimplementedMediaServiceServer) SearchTMDB(context.Context, *SearchTMDBRequest) (*SearchTMDBResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTMDB not implemented")
 }
 func (UnimplementedMediaServiceServer) mustEmbedUnimplementedMediaServiceServer() {}
 func (UnimplementedMediaServiceServer) testEmbeddedByValue()                      {}
@@ -147,7 +163,7 @@ func RegisterMediaServiceServer(s grpc.ServiceRegistrar, srv MediaServiceServer)
 }
 
 func _MediaService_GetMediaByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMediaRequest)
+	in := new(GetMediaByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -159,13 +175,13 @@ func _MediaService_GetMediaByID_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: MediaService_GetMediaByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaServiceServer).GetMediaByID(ctx, req.(*GetMediaRequest))
+		return srv.(MediaServiceServer).GetMediaByID(ctx, req.(*GetMediaByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _MediaService_GetMediasByName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMediaRequest)
+	in := new(GetMediasByNameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -177,7 +193,7 @@ func _MediaService_GetMediasByName_Handler(srv interface{}, ctx context.Context,
 		FullMethod: MediaService_GetMediasByName_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MediaServiceServer).GetMediasByName(ctx, req.(*GetMediaRequest))
+		return srv.(MediaServiceServer).GetMediasByName(ctx, req.(*GetMediasByNameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -218,6 +234,24 @@ func _MediaService_UpdateMedia_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MediaService_SearchTMDB_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchTMDBRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MediaServiceServer).SearchTMDB(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MediaService_SearchTMDB_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MediaServiceServer).SearchTMDB(ctx, req.(*SearchTMDBRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MediaService_ServiceDesc is the grpc.ServiceDesc for MediaService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -240,6 +274,10 @@ var MediaService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateMedia",
 			Handler:    _MediaService_UpdateMedia_Handler,
+		},
+		{
+			MethodName: "SearchTMDB",
+			Handler:    _MediaService_SearchTMDB_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

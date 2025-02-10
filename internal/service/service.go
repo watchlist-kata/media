@@ -14,49 +14,56 @@ import (
 	"log/slog"
 )
 
-// Service представляет собой структуру сервиса
-type Service struct {
-	repo   *repository.Repository
+// Service определяет интерфейс для сервиса
+type Service interface {
+	GetMediaByID(ctx context.Context, req *api.GetMediaByIDRequest) (*api.Media, error)
+	GetMediasByName(ctx context.Context, req *api.GetMediasByNameRequest) (*api.MediaList, error)
+	SearchTMDB(ctx context.Context, name string) ([]*api.Media, error)
+	SaveMedia(ctx context.Context, req *api.SaveMediaRequest) (*api.Media, error)
+	UpdateMedia(ctx context.Context, media *api.Media) (*api.Media, error)
+}
+
+// MediaService представляет собой структуру сервиса
+type MediaService struct {
+	repo   repository.Repository
 	Logger *slog.Logger
 }
 
-// NewService создает новый экземпляр сервиса
-func NewService(repo *repository.Repository, logger *slog.Logger) *Service {
-	return &Service{repo: repo, Logger: logger}
+// NewMediaService создает новый экземпляр MediaService
+func NewMediaService(repo repository.Repository, logger *slog.Logger) Service {
+	return &MediaService{repo: repo, Logger: logger}
 }
 
-// GetMediaByID получает медиа по его ID и обновляет базу данных, если необходимо
-func (s *Service) GetMediaByID(req *api.GetMediaRequest) (*api.Media, error) {
-	s.Logger.InfoContext(context.Background(), "GetMediaByID called", "id", req.Id)
-	media, err := s.repo.GetMediaByID(req.Id)
+// Verify that MediaService implements the Service interface at compile time.
+var _ Service = (*MediaService)(nil)
+
+// GetMediaByID получает медиа по его ID
+func (s *MediaService) GetMediaByID(ctx context.Context, req *api.GetMediaByIDRequest) (*api.Media, error) {
+	s.Logger.InfoContext(ctx, "GetMediaByID called", "id", req.Id)
+	media, err := s.repo.GetMediaByID(ctx, req.Id)
 	if err != nil {
-		s.Logger.ErrorContext(context.Background(), "Failed to GetMediaByID", "id", req.Id, "error", err)
-		return nil, err
+		s.Logger.ErrorContext(ctx, "Failed to GetMediaByID", "id", req.Id, "error", err)
+		return nil, fmt.Errorf("failed to get media with id %d: %w", req.Id, err)
 	}
 	return media, nil
 }
 
-func (s *Service) GetMediasByName(req *api.GetMediaRequest) (*api.MediaList, error) {
-	cfg, err := config.LoadConfig()
-	if err != nil {
-		s.Logger.ErrorContext(context.Background(), "Failed to load config", "error", err)
-		return nil, err
-	}
-
-	s.Logger.InfoContext(context.Background(), "GetMediasByName called", "name", req.Name)
+// GetMediasByName получает медиа по названию, ищет в TMDB и локальной БД, и обновляет локальную БД асинхронно
+func (s *MediaService) GetMediasByName(ctx context.Context, req *api.GetMediasByNameRequest) (*api.MediaList, error) {
+	s.Logger.InfoContext(ctx, "GetMediasByName called", "name", req.Name)
 
 	// 1. Поиск медиа в TMDB
-	tmdbMedias, err := s.searchTMDB(req.Name, cfg)
+	tmdbMedias, err := s.SearchTMDB(ctx, req.Name)
 	if err != nil {
-		s.Logger.ErrorContext(context.Background(), "Failed to search TMDB", "name", req.Name, "error", err)
+		s.Logger.ErrorContext(ctx, "Failed to search TMDB", "name", req.Name, "error", err)
 		// Не прерываем выполнение, продолжаем с локальной базой данных
 	}
 
 	// 2. Получение медиа из локальной базы данных
-	localMedias, err := s.repo.GetMediasByName(req.Name)
+	localMedias, err := s.repo.GetMediasByName(ctx, req.Name)
 	if err != nil {
-		s.Logger.ErrorContext(context.Background(), "Failed to GetMediasByName from DB", "name", req.Name, "error", err)
-		return nil, err
+		s.Logger.ErrorContext(ctx, "Failed to GetMediasByName from DB", "name", req.Name, "error", err)
+		return nil, fmt.Errorf("failed to get medias by name %s from DB: %w", req.Name, err)
 	}
 
 	// 3. Объединение результатов
@@ -79,12 +86,12 @@ func (s *Service) GetMediasByName(req *api.GetMediaRequest) (*api.MediaList, err
 	}
 
 	// Асинхронное обновление базы данных
-	go s.updateDatabaseAsync(localMedias, tmdbMedias)
+	go s.updateDatabaseAsync(context.Background(), localMedias, tmdbMedias)
 
 	return &api.MediaList{Medias: mediaPointers}, nil
 }
 
-func (s *Service) updateDatabaseAsync(localMedias []*api.Media, tmdbMedias []*api.Media) {
+func (s *MediaService) updateDatabaseAsync(ctx context.Context, localMedias []*api.Media, tmdbMedias []*api.Media) {
 	mediaMap := make(map[int64]*api.Media)
 
 	// Заполняем map локальными медиа
@@ -99,16 +106,20 @@ func (s *Service) updateDatabaseAsync(localMedias []*api.Media, tmdbMedias []*ap
 			// Медиа существует в локальной базе данных, обновляем информацию
 			if needsUpdate(localMedia, tmdbMedia) {
 				tmdbMedia.Id = localMedia.Id // Сохраняем ID из локальной базы данных
-				_, err := s.UpdateMedia(tmdbMedia)
+				_, err := s.UpdateMedia(ctx, tmdbMedia)
 				if err != nil {
-					s.Logger.ErrorContext(context.Background(), "Failed to update media", "tmdbID", tmdbMedia.TmdbId, "error", err)
+					s.Logger.ErrorContext(ctx, "Failed to update media", "tmdbID", tmdbMedia.TmdbId, "error", err)
+					// Здесь можно не оборачивать ошибку, так как это асинхронная операция
+					// и ошибка уже залогирована.
 				}
 			}
 		} else {
 			// Медиа не существует в локальной базе данных, сохраняем
-			err := s.repo.CreateMedia(tmdbMedia)
+			err := s.repo.CreateMedia(ctx, tmdbMedia)
 			if err != nil {
-				s.Logger.ErrorContext(context.Background(), "Failed to create media", "tmdbID", tmdbMedia.TmdbId, "error", err)
+				s.Logger.ErrorContext(ctx, "Failed to create media", "tmdbID", tmdbMedia.TmdbId, "error", err)
+				// Здесь можно не оборачивать ошибку, так как это асинхронная операция
+				// и ошибка уже залогирована.
 			}
 		}
 	}
@@ -124,16 +135,25 @@ func needsUpdate(localMedia, tmdbMedia *api.Media) bool {
 		localMedia.Poster != tmdbMedia.Poster
 }
 
-func (s *Service) searchTMDB(name string, cfg *config.Config) ([]*api.Media, error) {
+// SearchTMDB выполняет поиск медиа в TMDB по названию
+func (s *MediaService) SearchTMDB(ctx context.Context, name string) ([]*api.Media, error) {
+	cfg, err := config.LoadConfig()
+	if err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to load config", "error", err)
+		return nil, fmt.Errorf("failed to load config: %w", err)
+	}
+
 	// Инициализируем клиент TMDB
 	tmdbClient, err := tmdb.InitTMDBClient(cfg)
 	if err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to initialize TMDB client", "error", err)
 		return nil, fmt.Errorf("failed to initialize TMDB client: %w", err)
 	}
 
 	// Выполняем поиск
 	searchResults, err := tmdbClient.GetSearchMovies(name, nil)
 	if err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to search movies in TMDB", "error", err)
 		return nil, fmt.Errorf("failed to search movies in TMDB: %w", err)
 	}
 
@@ -162,27 +182,27 @@ func (s *Service) searchTMDB(name string, cfg *config.Config) ([]*api.Media, err
 	return medias, nil
 }
 
-// SaveMedia сохраняет новое медиа или обновляет существующее
-func (s *Service) SaveMedia(req *api.SaveMediaRequest) (*api.Media, error) {
-	s.Logger.InfoContext(context.Background(), "SaveMedia called", "tmdbID", req.Media.TmdbId)
-	if err := s.repo.CreateMedia(req.Media); err != nil {
-		s.Logger.ErrorContext(context.Background(), "Failed to SaveMedia", "tmdbID", req.Media.TmdbId, "error", err)
-		return nil, err
+// SaveMedia сохраняет новое медиа
+func (s *MediaService) SaveMedia(ctx context.Context, req *api.SaveMediaRequest) (*api.Media, error) {
+	s.Logger.InfoContext(ctx, "SaveMedia called", "tmdbID", req.Media.TmdbId)
+	if err := s.repo.CreateMedia(ctx, req.Media); err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to SaveMedia", "tmdbID", req.Media.TmdbId, "error", err)
+		return nil, fmt.Errorf("failed to save media with tmdb_id %d: %w", req.Media.TmdbId, err)
 	}
 	return req.Media, nil
 }
 
-// UpdateMedia обновляет существующее медиа, если информация отличается
-func (s *Service) UpdateMedia(media *api.Media) (*api.Media, error) {
-	s.Logger.InfoContext(context.Background(), "UpdateMedia called", "tmdbID", media.TmdbId)
-	existingMedia, err := s.repo.GetMediaByID(media.Id)
+// UpdateMedia обновляет существующее медиа
+func (s *MediaService) UpdateMedia(ctx context.Context, media *api.Media) (*api.Media, error) {
+	s.Logger.InfoContext(ctx, "UpdateMedia called", "tmdbID", media.TmdbId)
+	existingMedia, err := s.repo.GetMediaByID(ctx, media.Id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			s.Logger.WarnContext(context.Background(), "Media with id not found", "mediaID", media.Id, "error", err)
-			return nil, fmt.Errorf("media with id %d not found", media.Id)
+			s.Logger.WarnContext(ctx, "Media with id not found", "mediaID", media.Id, "error", err)
+			return nil, fmt.Errorf("media with id %d not found: %w", media.Id, err)
 		}
-		s.Logger.ErrorContext(context.Background(), "Failed to UpdateMedia", "mediaID", media.Id, "error", err)
-		return nil, err
+		s.Logger.ErrorContext(ctx, "Failed to UpdateMedia", "mediaID", media.Id, "error", err)
+		return nil, fmt.Errorf("failed to get existing media with id %d: %w", media.Id, err)
 	}
 
 	if existingMedia.TmdbId == media.TmdbId &&
@@ -193,21 +213,21 @@ func (s *Service) UpdateMedia(media *api.Media) (*api.Media, error) {
 		existingMedia.DescriptionRu == media.DescriptionRu &&
 		existingMedia.ReleaseDate == media.ReleaseDate &&
 		existingMedia.Poster == media.Poster {
-		s.Logger.InfoContext(context.Background(), "No fields to update", "mediaID", media.Id)
+		s.Logger.InfoContext(ctx, "No fields to update", "mediaID", media.Id)
 		return nil, fmt.Errorf("all fields are the same, nothing to update")
 	}
 
-	if err := s.repo.UpdateMedia(media); err != nil {
-		s.Logger.ErrorContext(context.Background(), "Failed to UpdateMedia in repository", "mediaID", media.Id, "error", err)
-		return nil, err
+	if err := s.repo.UpdateMedia(ctx, media); err != nil {
+		s.Logger.ErrorContext(ctx, "Failed to UpdateMedia in repository", "mediaID", media.Id, "error", err)
+		return nil, fmt.Errorf("failed to update media with id %d in repository: %w", media.Id, err)
 	}
 
-	updatedMedia, err := s.repo.GetMediaByID(media.Id) // Fetch updated media
+	updatedMedia, err := s.repo.GetMediaByID(ctx, media.Id) // Fetch updated media
 	if err != nil {
-		s.Logger.ErrorContext(context.Background(), "Failed to get updated media", "mediaID", media.Id, "error", err)
-		return nil, err
+		s.Logger.ErrorContext(ctx, "Failed to get updated media", "mediaID", media.Id, "error", err)
+		return nil, fmt.Errorf("failed to get updated media with id %d: %w", media.Id, err)
 	}
 
-	s.Logger.InfoContext(context.Background(), "Media updated successfully", "mediaID", media.Id)
+	s.Logger.InfoContext(ctx, "Media updated successfully", "mediaID", media.Id)
 	return updatedMedia, nil // Return updated media
 }

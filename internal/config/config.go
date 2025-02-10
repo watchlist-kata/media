@@ -30,7 +30,7 @@ func LoadConfig() (*Config, error) {
 	// Загружаем переменные окружения из .env файла
 	err := godotenv.Load()
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to load .env file: %w", err)
 	}
 
 	// Преобразуем KAFKA_BROKERS в []string
@@ -40,7 +40,7 @@ func LoadConfig() (*Config, error) {
 	logBufferSizeStr := os.Getenv("LOG_BUFFER_SIZE")
 	logBufferSize, err := strconv.Atoi(logBufferSizeStr)
 	if err != nil {
-		return nil, fmt.Errorf("invalid LOG_BUFFER_SIZE: %w", err)
+		return nil, fmt.Errorf("failed to convert LOG_BUFFER_SIZE to int: %w", err)
 	}
 
 	return &Config{

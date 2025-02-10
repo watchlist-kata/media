@@ -28,10 +28,14 @@ message Media {
   string poster = 9;            // URL постера
 }
 
-// Сообщение для запроса на получение медиа
-message GetMediaRequest {
+// Сообщение для запроса на получение медиа по ID
+message GetMediaByIDRequest {
   int64 id = 1;                 // ID медиа для получения
-  string name = 2;              // Название медиа для поиска
+}
+
+// Сообщение для запроса на получение медиа по названию
+message GetMediasByNameRequest {
+  string name = 1;              // Название медиа для поиска
 }
 
 // Сообщение для запроса на сохранение медиа
@@ -44,15 +48,25 @@ message MediaList {
   repeated Media medias = 1;    // Список медиа
 }
 
+// Сообщение для поиска медиа в TMDB
+message SearchTMDBRequest {
+  string name = 1;
+}
+
+// Сообщение для ответа на поиск медиа в TMDB
+message SearchTMDBResponse {
+  repeated Media medias = 1;
+}
+
 // Сервис медиа
 service MediaService {
-  rpc GetMediaByID (GetMediaRequest) returns (Media) {
+  rpc GetMediaByID (GetMediaByIDRequest) returns (Media) {
     option (google.api.http) = {
       get: "/media/{id}"
     };
   }           // Получение медиа по ID
 
-  rpc GetMediasByName (GetMediaRequest) returns (MediaList) {
+  rpc GetMediasByName (GetMediasByNameRequest) returns (MediaList) {
     option (google.api.http) = {
       get: "/medias/search"
     };
@@ -71,4 +85,10 @@ service MediaService {
       body: "media"
     };
   }             // Обновление информации о медиа
-}
+
+  rpc SearchTMDB(SearchTMDBRequest) returns (SearchTMDBResponse) {
+    option (google.api.http) = {
+      get: "/tmdb/search"
+    };
+  }
+}                // Поиск медиа по названию только в TMDB (без сравнения с нашей базой)

@@ -1,0 +1,436 @@
+[INFO] - 2025-02-09T15:33:14+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:33:14+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:33:14+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:33:15+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:33:30+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:33:30+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:33:30+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:33:30+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:34:22+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:34:22+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:34:22+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:34:22+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:35:27+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:35:27+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:35:27+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:35:28+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:35:55+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:35:55+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:35:55+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:35:56+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:36:22+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:36:22+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:36:22+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:36:22+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:37:41+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:37:41+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:37:41+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:37:41+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:38:33+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:38:33+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:38:33+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:38:33+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:39:31+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:39:31+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:39:31+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:39:31+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:39:45+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:39:45+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:39:45+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:39:45+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:40:03+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:40:03+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:40:03+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:40:03+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:42:27+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:42:27+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:42:27+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:42:27+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:50:52+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:50:52+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:50:52+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:51:46+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:51:46+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:51:46+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:51:46+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:52:17+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:52:17+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:52:17+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:52:17+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:52:37+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:52:37+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:52:37+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T15:52:37+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T15:57:06+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T15:57:06+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T15:57:06+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T16:07:00+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T16:18:57+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T16:18:57+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T16:18:57+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T16:18:57+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T16:20:13+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T16:20:13+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T16:20:13+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T16:20:13+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T16:29:20+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T16:36:00+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T16:36:00+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T16:36:00+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T16:38:58+03:00 - UpdateMedia called
+[INFO] - 2025-02-09T16:38:58+03:00 - UpdateMedia called
+[INFO] - 2025-02-09T16:41:14+03:00 - UpdateMedia called
+[INFO] - 2025-02-09T16:41:14+03:00 - UpdateMedia called
+[INFO] - 2025-02-09T16:41:14+03:00 - Media retrieved successfully
+[INFO] - 2025-02-09T16:41:14+03:00 - Media updated successfully
+[INFO] - 2025-02-09T16:41:14+03:00 - Media retrieved successfully
+[INFO] - 2025-02-09T16:41:14+03:00 - Media updated successfully
+[INFO] - 2025-02-09T16:41:57+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T16:41:57+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T16:41:57+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T16:41:57+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T16:42:08+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T16:42:08+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T16:42:08+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T16:42:08+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T16:42:34+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T16:42:34+03:00 - GetMediasByName called
+[ERROR] - 2025-02-09T16:42:34+03:00 - Failed to search TMDB
+[INFO] - 2025-02-09T16:42:34+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T16:53:18+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T16:53:18+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T17:09:26+03:00 - Medias retrieved successfully
+[ERROR] - 2025-02-09T17:09:27+03:00 - Failed to create media
+[ERROR] - 2025-02-09T17:09:27+03:00 - Failed to create media
+[INFO] - 2025-02-09T17:09:28+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:28+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:28+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:29+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:29+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:30+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:31+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:31+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:33+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:33+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:34+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:34+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:36+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:09:36+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:27+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T17:20:27+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T17:20:30+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T17:20:31+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:31+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:31+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:33+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:33+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:34+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:34+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:36+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:36+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:36+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:37+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:37+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:37+03:00 - Media created successfully
+[INFO] - 2025-02-09T17:20:38+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:14:38+03:00 - Request Headers
+[INFO] - 2025-02-09T18:14:38+03:00 - Request started
+[INFO] - 2025-02-09T18:14:38+03:00 - SearchTMDB called
+[INFO] - 2025-02-09T18:14:39+03:00 - Request finished
+[INFO] - 2025-02-09T18:33:27+03:00 - Request Headers
+[INFO] - 2025-02-09T18:33:27+03:00 - Request started
+[INFO] - 2025-02-09T18:33:27+03:00 - SearchTMDB called
+[INFO] - 2025-02-09T18:33:28+03:00 - Request finished
+[INFO] - 2025-02-09T18:33:49+03:00 - Request Headers
+[INFO] - 2025-02-09T18:33:49+03:00 - Request started
+[INFO] - 2025-02-09T18:33:49+03:00 - SearchTMDB called
+[INFO] - 2025-02-09T18:33:49+03:00 - Request finished
+[INFO] - 2025-02-09T18:34:18+03:00 - Request Headers
+[INFO] - 2025-02-09T18:34:18+03:00 - Request started
+[INFO] - 2025-02-09T18:34:18+03:00 - GetMediaByID called
+[INFO] - 2025-02-09T18:34:18+03:00 - GetMediaByID called
+[ERROR] - 2025-02-09T18:34:18+03:00 - Failed to get media by ID
+[ERROR] - 2025-02-09T18:34:18+03:00 - Failed to GetMediaByID
+[ERROR] - 2025-02-09T18:34:18+03:00 - Failed to GetMediaByID
+[ERROR] - 2025-02-09T18:34:18+03:00 - Request failed
+[INFO] - 2025-02-09T18:34:32+03:00 - Request Headers
+[INFO] - 2025-02-09T18:34:32+03:00 - Request started
+[INFO] - 2025-02-09T18:34:32+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:34:32+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:34:33+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:34:33+03:00 - Request finished
+[INFO] - 2025-02-09T18:36:06+03:00 - Request Headers
+[INFO] - 2025-02-09T18:36:06+03:00 - Request started
+[INFO] - 2025-02-09T18:36:06+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:36:06+03:00 - SaveMedia called
+[ERROR] - 2025-02-09T18:36:07+03:00 - Failed to create media
+[ERROR] - 2025-02-09T18:36:07+03:00 - Failed to SaveMedia
+[ERROR] - 2025-02-09T18:36:07+03:00 - Failed to SaveMedia
+[ERROR] - 2025-02-09T18:36:07+03:00 - Request failed
+[INFO] - 2025-02-09T18:36:22+03:00 - Request Headers
+[INFO] - 2025-02-09T18:36:22+03:00 - Request started
+[INFO] - 2025-02-09T18:36:22+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:36:22+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:36:23+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:36:23+03:00 - Request finished
+[INFO] - 2025-02-09T18:39:59+03:00 - Request Headers
+[INFO] - 2025-02-09T18:39:59+03:00 - Request started
+[INFO] - 2025-02-09T18:39:59+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:39:59+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:40:00+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:40:00+03:00 - Request finished
+[INFO] - 2025-02-09T18:41:02+03:00 - Request Headers
+[INFO] - 2025-02-09T18:41:02+03:00 - Request started
+[INFO] - 2025-02-09T18:41:02+03:00 - SearchTMDB called
+[INFO] - 2025-02-09T18:41:03+03:00 - Request finished
+[INFO] - 2025-02-09T18:51:43+03:00 - Request Headers
+[INFO] - 2025-02-09T18:51:43+03:00 - Request started
+[INFO] - 2025-02-09T18:51:43+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T18:51:43+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T18:51:46+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T18:51:46+03:00 - Request finished
+[INFO] - 2025-02-09T18:51:46+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:47+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:47+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:47+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:48+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:48+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:49+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:49+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:50+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:50+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:51+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:51+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:52+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:52+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:53+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:53+03:00 - Media created successfully
+[ERROR] - 2025-02-09T18:51:53+03:00 - Failed to create media
+[ERROR] - 2025-02-09T18:51:53+03:00 - Failed to create media
+[INFO] - 2025-02-09T18:51:54+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:55+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:51:55+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:52:45+03:00 - Request Headers
+[INFO] - 2025-02-09T18:52:45+03:00 - Request started
+[INFO] - 2025-02-09T18:52:45+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:52:45+03:00 - SaveMedia called
+[INFO] - 2025-02-09T18:52:46+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:52:46+03:00 - Request finished
+[INFO] - 2025-02-09T18:53:34+03:00 - Request Headers
+[INFO] - 2025-02-09T18:53:34+03:00 - Request started
+[INFO] - 2025-02-09T18:53:34+03:00 - SearchTMDB called
+[INFO] - 2025-02-09T18:53:35+03:00 - Request finished
+[INFO] - 2025-02-09T18:56:18+03:00 - Request Headers
+[INFO] - 2025-02-09T18:56:18+03:00 - Request started
+[INFO] - 2025-02-09T18:56:18+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T18:56:18+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T18:56:20+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T18:56:20+03:00 - Request finished
+[INFO] - 2025-02-09T18:56:20+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:21+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:21+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:22+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:22+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:22+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:23+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:23+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:24+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:24+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:25+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:25+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:26+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:26+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:27+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:27+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:27+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:28+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:28+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:29+03:00 - Media created successfully
+[INFO] - 2025-02-09T18:56:59+03:00 - Request Headers
+[INFO] - 2025-02-09T18:56:59+03:00 - Request started
+[INFO] - 2025-02-09T18:56:59+03:00 - GetMediaByID called
+[INFO] - 2025-02-09T18:56:59+03:00 - GetMediaByID called
+[INFO] - 2025-02-09T18:56:59+03:00 - Media retrieved successfully
+[INFO] - 2025-02-09T18:56:59+03:00 - Request finished
+[INFO] - 2025-02-09T18:57:15+03:00 - Request Headers
+[INFO] - 2025-02-09T18:57:15+03:00 - Request started
+[INFO] - 2025-02-09T18:57:15+03:00 - UpdateMedia called
+[INFO] - 2025-02-09T18:57:15+03:00 - UpdateMedia called
+[INFO] - 2025-02-09T18:57:16+03:00 - Media retrieved successfully
+[INFO] - 2025-02-09T18:57:16+03:00 - Media updated successfully
+[INFO] - 2025-02-09T18:57:17+03:00 - Media retrieved successfully
+[INFO] - 2025-02-09T18:57:17+03:00 - Media updated successfully
+[INFO] - 2025-02-09T18:57:17+03:00 - Request finished
+[INFO] - 2025-02-09T19:36:25+03:00 - Request Headers
+[INFO] - 2025-02-09T19:36:25+03:00 - Request started
+[INFO] - 2025-02-09T19:36:25+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T19:36:25+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T19:36:29+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T19:36:29+03:00 - Request finished
+[INFO] - 2025-02-09T19:36:30+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:31+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:32+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:33+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:33+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:34+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:34+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:35+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:36+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:37+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:37+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:37+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:38+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:38+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:39+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:39+03:00 - Media created successfully
+[INFO] - 2025-02-09T19:36:40+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:33+03:00 - Request Headers
+[INFO] - 2025-02-09T20:41:33+03:00 - Request started
+[INFO] - 2025-02-09T20:41:33+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T20:41:33+03:00 - GetMediasByName called
+[INFO] - 2025-02-09T20:41:35+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-09T20:41:35+03:00 - Request finished
+[INFO] - 2025-02-09T20:41:36+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:37+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:38+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:38+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:40+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:40+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:41+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:41+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:42+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:43+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:44+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:44+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:45+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:45+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:46+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:47+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:48+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:49+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:49+03:00 - Media created successfully
+[INFO] - 2025-02-09T20:41:50+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:00:29+03:00 - Request Headers
+[INFO] - 2025-02-10T11:00:29+03:00 - Request started
+[INFO] - 2025-02-10T11:00:29+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:00:29+03:00 - GetMediasByName called
+[ERROR] - 2025-02-10T11:00:29+03:00 - Failed to search movies in TMDB
+[ERROR] - 2025-02-10T11:00:29+03:00 - Failed to search TMDB
+[INFO] - 2025-02-10T11:00:29+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-10T11:00:29+03:00 - Request finished
+[INFO] - 2025-02-10T11:01:00+03:00 - Request Headers
+[INFO] - 2025-02-10T11:01:00+03:00 - Request started
+[INFO] - 2025-02-10T11:01:00+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:01:00+03:00 - GetMediasByName called
+[ERROR] - 2025-02-10T11:01:00+03:00 - Failed to search movies in TMDB
+[ERROR] - 2025-02-10T11:01:00+03:00 - Failed to search TMDB
+[INFO] - 2025-02-10T11:01:00+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-10T11:01:00+03:00 - Request finished
+[INFO] - 2025-02-10T11:01:27+03:00 - Request Headers
+[INFO] - 2025-02-10T11:01:27+03:00 - Request started
+[INFO] - 2025-02-10T11:01:27+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:01:27+03:00 - GetMediasByName called
+[ERROR] - 2025-02-10T11:01:27+03:00 - Failed to search movies in TMDB
+[ERROR] - 2025-02-10T11:01:27+03:00 - Failed to search TMDB
+[INFO] - 2025-02-10T11:01:27+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-10T11:01:27+03:00 - Request finished
+[INFO] - 2025-02-10T11:02:25+03:00 - Request Headers
+[INFO] - 2025-02-10T11:02:25+03:00 - Request started
+[INFO] - 2025-02-10T11:02:25+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:02:25+03:00 - GetMediasByName called
+[ERROR] - 2025-02-10T11:02:25+03:00 - Failed to search movies in TMDB
+[ERROR] - 2025-02-10T11:02:25+03:00 - Failed to search TMDB
+[INFO] - 2025-02-10T11:02:25+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-10T11:02:25+03:00 - Request finished
+[INFO] - 2025-02-10T11:02:46+03:00 - Request Headers
+[INFO] - 2025-02-10T11:02:46+03:00 - Request started
+[INFO] - 2025-02-10T11:02:46+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:02:46+03:00 - GetMediasByName called
+[ERROR] - 2025-02-10T11:02:46+03:00 - Failed to search movies in TMDB
+[ERROR] - 2025-02-10T11:02:46+03:00 - Failed to search TMDB
+[INFO] - 2025-02-10T11:02:47+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-10T11:02:47+03:00 - Request finished
+[INFO] - 2025-02-10T11:03:09+03:00 - Request Headers
+[INFO] - 2025-02-10T11:03:09+03:00 - Request started
+[INFO] - 2025-02-10T11:03:09+03:00 - SearchTMDB called
+[ERROR] - 2025-02-10T11:03:09+03:00 - Failed to search movies in TMDB
+[ERROR] - 2025-02-10T11:03:09+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-10T11:03:09+03:00 - Request failed
+[INFO] - 2025-02-10T11:10:44+03:00 - Request Headers
+[INFO] - 2025-02-10T11:10:44+03:00 - Request started
+[INFO] - 2025-02-10T11:10:44+03:00 - SearchTMDB called
+[ERROR] - 2025-02-10T11:10:44+03:00 - Failed to search movies in TMDB
+[ERROR] - 2025-02-10T11:10:44+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-10T11:10:44+03:00 - Request failed
+[INFO] - 2025-02-10T11:16:57+03:00 - Request Headers
+[INFO] - 2025-02-10T11:16:57+03:00 - Request started
+[INFO] - 2025-02-10T11:16:57+03:00 - SearchTMDB called
+[INFO] - 2025-02-10T11:16:59+03:00 - Request finished
+[INFO] - 2025-02-10T11:17:30+03:00 - Request Headers
+[INFO] - 2025-02-10T11:17:30+03:00 - Request started
+[INFO] - 2025-02-10T11:17:30+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:17:30+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:17:32+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-10T11:17:32+03:00 - Request finished
+[INFO] - 2025-02-10T11:17:33+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:33+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:33+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:34+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:34+03:00 - Media created successfully
+[ERROR] - 2025-02-10T11:17:34+03:00 - Failed to create media
+[ERROR] - 2025-02-10T11:17:34+03:00 - Failed to create media
+[INFO] - 2025-02-10T11:17:35+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:35+03:00 - Media created successfully
+[ERROR] - 2025-02-10T11:17:36+03:00 - Failed to create media
+[ERROR] - 2025-02-10T11:17:36+03:00 - Failed to create media
+[INFO] - 2025-02-10T11:17:36+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:36+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:37+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:37+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:37+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:38+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:38+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:38+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:39+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:39+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:17:39+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:01+03:00 - Request Headers
+[INFO] - 2025-02-10T11:18:01+03:00 - Request started
+[INFO] - 2025-02-10T11:18:01+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:18:01+03:00 - GetMediasByName called
+[INFO] - 2025-02-10T11:18:01+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-10T11:18:01+03:00 - Request finished
+[INFO] - 2025-02-10T11:18:01+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:02+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:02+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:02+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:03+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:03+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:03+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:04+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:04+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:04+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:05+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:05+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:06+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:06+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:06+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:07+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:07+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:07+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:08+03:00 - Media created successfully
+[INFO] - 2025-02-10T11:18:08+03:00 - Media created successfully
