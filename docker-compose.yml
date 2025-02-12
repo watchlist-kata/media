@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  media:
+    build: .
+    ports:
+      - "50051:50051"
+    env_file:
+      - ./cmd/.env
+    volumes:
+      - ./cmd/logs:/app/logs
+    networks:
+      - media-network
+
+networks:
+  media-network:
+    driver: bridge
