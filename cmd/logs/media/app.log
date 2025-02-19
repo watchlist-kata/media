@@ -1564,3 +1564,411 @@
 [INFO] - 2025-02-12T03:17:46+03:00 - SearchTMDB called
 [INFO] - 2025-02-12T03:22:37+03:00 - SearchTMDB called
 [INFO] - 2025-02-12T03:22:37+03:00 - SearchTMDB called
+[INFO] - 2025-02-18T21:28:09+03:00 - Starting gRPC server
+[INFO] - 2025-02-18T21:44:57+03:00 - SaveMedia called
+[INFO] - 2025-02-18T21:44:57+03:00 - SaveMedia called
+[INFO] - 2025-02-18T21:44:57+03:00 - Creating media
+[INFO] - 2025-02-18T21:44:59+03:00 - Media created successfully
+[INFO] - 2025-02-18T21:46:52+03:00 - GetMediaByID called
+[INFO] - 2025-02-18T21:46:52+03:00 - GetMediaByID called
+[INFO] - 2025-02-18T21:46:53+03:00 - Media retrieved successfully
+[INFO] - 2025-02-18T21:48:07+03:00 - UpdateMedia called
+[INFO] - 2025-02-18T21:48:07+03:00 - UpdateMedia called
+[INFO] - 2025-02-18T21:48:09+03:00 - Media retrieved successfully
+[INFO] - 2025-02-18T21:48:10+03:00 - Existing media found for update
+[INFO] - 2025-02-18T21:48:10+03:00 - Updating media fields
+[INFO] - 2025-02-18T21:48:10+03:00 - Media retrieved successfully
+[INFO] - 2025-02-18T21:48:10+03:00 - Successfully updated media
+[INFO] - 2025-02-18T21:48:10+03:00 - Media updated successfully
+[INFO] - 2025-02-18T21:51:39+03:00 - SearchTMDB called
+[INFO] - 2025-02-18T21:51:39+03:00 - SearchTMDB called
+[ERROR] - 2025-02-18T21:51:39+03:00 - Failed to execute GetSearchMulti
+[ERROR] - 2025-02-18T21:51:39+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-18T21:51:39+03:00 - Failed to search TMDB
+[INFO] - 2025-02-18T21:53:15+03:00 - SearchTMDB called
+[INFO] - 2025-02-18T21:53:15+03:00 - SearchTMDB called
+[ERROR] - 2025-02-18T21:53:15+03:00 - Failed to execute GetSearchMulti
+[ERROR] - 2025-02-18T21:53:15+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-18T21:53:15+03:00 - Failed to search TMDB
+[INFO] - 2025-02-18T21:56:18+03:00 - Received shutdown signal
+[INFO] - 2025-02-18T21:56:18+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-18T21:56:18+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-18T21:56:18+03:00 - Closing database connection
+[INFO] - 2025-02-18T21:56:18+03:00 - Database connection closed
+[INFO] - 2025-02-18T21:56:18+03:00 - Shutdown complete
+[INFO] - 2025-02-18T21:56:18+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-18T21:56:18+03:00 - Server exited properly
+[INFO] - 2025-02-18T22:24:08+03:00 - Starting gRPC server
+[INFO] - 2025-02-18T22:24:41+03:00 - SearchTMDB called
+[INFO] - 2025-02-18T22:24:41+03:00 - SearchTMDB called
+[ERROR] - 2025-02-18T22:24:41+03:00 - Failed to execute request
+[ERROR] - 2025-02-18T22:24:41+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-18T22:24:41+03:00 - Failed to search TMDB
+[INFO] - 2025-02-18T22:25:17+03:00 - SearchTMDB called
+[INFO] - 2025-02-18T22:25:17+03:00 - SearchTMDB called
+[ERROR] - 2025-02-18T22:25:17+03:00 - Failed to execute request
+[ERROR] - 2025-02-18T22:25:17+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-18T22:25:17+03:00 - Failed to search TMDB
+[INFO] - 2025-02-18T22:25:39+03:00 - Received shutdown signal
+[INFO] - 2025-02-18T22:25:39+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-18T22:25:39+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-18T22:25:39+03:00 - Closing database connection
+[INFO] - 2025-02-18T22:25:39+03:00 - Database connection closed
+[INFO] - 2025-02-18T22:25:39+03:00 - Shutdown complete
+[INFO] - 2025-02-18T22:25:39+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-18T22:25:39+03:00 - Server exited properly
+[INFO] - 2025-02-18T22:42:41+03:00 - Starting gRPC server
+[INFO] - 2025-02-18T22:42:57+03:00 - SearchTMDB called
+[INFO] - 2025-02-18T22:42:57+03:00 - SearchTMDB called
+[ERROR] - 2025-02-18T22:42:57+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-18T22:42:57+03:00 - Failed to search TMDB
+[INFO] - 2025-02-18T22:44:15+03:00 - SearchTMDB called
+[INFO] - 2025-02-18T22:44:15+03:00 - SearchTMDB called
+[ERROR] - 2025-02-18T22:44:15+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-18T22:44:15+03:00 - Failed to search TMDB
+[INFO] - 2025-02-18T22:49:05+03:00 - Received shutdown signal
+[INFO] - 2025-02-18T22:49:05+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-18T22:49:05+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-18T22:49:05+03:00 - Closing database connection
+[INFO] - 2025-02-18T22:49:05+03:00 - Database connection closed
+[INFO] - 2025-02-18T22:49:05+03:00 - Shutdown complete
+[INFO] - 2025-02-18T22:49:05+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T12:18:56+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T12:19:26+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T12:19:26+03:00 - SearchTMDB called
+[ERROR] - 2025-02-19T12:19:26+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-19T12:19:26+03:00 - Failed to search TMDB
+[INFO] - 2025-02-19T12:33:09+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T12:34:07+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T12:34:07+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T12:35:15+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T12:35:15+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T12:35:15+03:00 - SearchTMDB called
+[ERROR] - 2025-02-19T12:35:15+03:00 - Failed to get medias by name
+[ERROR] - 2025-02-19T12:35:15+03:00 - Failed to GetMediasByName from DB
+[ERROR] - 2025-02-19T12:35:15+03:00 - Failed to GetMediasByName
+[INFO] - 2025-02-19T12:35:52+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T12:35:52+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T12:35:52+03:00 - SearchTMDB called
+[ERROR] - 2025-02-19T12:35:52+03:00 - Failed to get medias by name
+[ERROR] - 2025-02-19T12:35:52+03:00 - Failed to GetMediasByName from DB
+[ERROR] - 2025-02-19T12:35:52+03:00 - Failed to GetMediasByName
+[INFO] - 2025-02-19T12:38:43+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T12:38:43+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T12:38:43+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T12:38:52+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T12:38:52+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T12:38:52+03:00 - SearchTMDB called
+[ERROR] - 2025-02-19T12:38:54+03:00 - Failed to get medias by name
+[ERROR] - 2025-02-19T12:38:54+03:00 - Failed to GetMediasByName from DB
+[ERROR] - 2025-02-19T12:38:54+03:00 - Failed to GetMediasByName
+[INFO] - 2025-02-19T12:40:15+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T12:40:15+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T13:00:24+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T13:00:24+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T13:00:24+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T13:00:24+03:00 - Closing database connection
+[INFO] - 2025-02-19T13:00:24+03:00 - Database connection closed
+[INFO] - 2025-02-19T13:00:24+03:00 - Shutdown complete
+[INFO] - 2025-02-19T13:00:24+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T13:00:24+03:00 - Server exited properly
+[INFO] - 2025-02-19T13:00:33+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T13:00:49+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T13:00:49+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T13:09:18+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T13:09:56+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T13:09:56+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T13:09:56+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T13:09:56+03:00 - Closing database connection
+[INFO] - 2025-02-19T13:12:33+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T13:12:54+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T13:12:54+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T13:12:54+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T13:13:01+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T13:13:01+03:00 - SearchTMDB called
+[ERROR] - 2025-02-19T13:13:01+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-19T13:13:01+03:00 - Failed to search TMDB
+[INFO] - 2025-02-19T13:13:13+03:00 - SearchTMDB called
+[INFO] - 2025-02-19T13:13:13+03:00 - SearchTMDB called
+[ERROR] - 2025-02-19T13:13:13+03:00 - Failed to search TMDB
+[ERROR] - 2025-02-19T13:13:13+03:00 - Failed to search TMDB
+[INFO] - 2025-02-19T13:13:33+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T13:13:33+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T13:13:33+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T13:13:33+03:00 - Closing database connection
+[INFO] - 2025-02-19T13:13:33+03:00 - Database connection closed
+[INFO] - 2025-02-19T13:13:33+03:00 - Shutdown complete
+[INFO] - 2025-02-19T13:13:33+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T13:13:33+03:00 - Server exited properly
+[INFO] - 2025-02-19T13:13:33+03:00 - Closing database connection
+[INFO] - 2025-02-19T13:13:33+03:00 - Database connection closed
+[INFO] - 2025-02-19T13:37:50+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T13:38:35+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T13:38:35+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T13:38:35+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T13:46:06+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T13:46:06+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T13:46:06+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T13:46:06+03:00 - Closing database connection
+[INFO] - 2025-02-19T13:46:06+03:00 - Database connection closed
+[INFO] - 2025-02-19T13:46:06+03:00 - Shutdown complete
+[INFO] - 2025-02-19T13:46:06+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T13:46:06+03:00 - Server exited properly
+[INFO] - 2025-02-19T13:46:06+03:00 - Closing database connection
+[INFO] - 2025-02-19T13:46:06+03:00 - Database connection closed
+[INFO] - 2025-02-19T16:43:57+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T16:43:57+03:00 - gRPC server listening
+[INFO] - 2025-02-19T16:45:15+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T16:45:15+03:00 - gRPC server listening
+[INFO] - 2025-02-19T16:49:00+03:00 - SaveMedia called
+[INFO] - 2025-02-19T16:49:00+03:00 - SaveMedia called
+[INFO] - 2025-02-19T16:49:00+03:00 - Creating media
+[ERROR] - 2025-02-19T16:49:00+03:00 - Failed to create media
+[ERROR] - 2025-02-19T16:49:00+03:00 - Failed to SaveMedia
+[ERROR] - 2025-02-19T16:49:00+03:00 - Failed to SaveMedia
+[ERROR] - 2025-02-19T16:49:00+03:00 - Failed to SaveMedia
+[INFO] - 2025-02-19T17:01:28+03:00 - SaveMedia called
+[INFO] - 2025-02-19T17:01:28+03:00 - SaveMedia called
+[INFO] - 2025-02-19T17:01:28+03:00 - Creating media
+[INFO] - 2025-02-19T17:01:29+03:00 - Media created successfully
+[INFO] - 2025-02-19T17:11:52+03:00 - DeleteMedia called
+[INFO] - 2025-02-19T17:11:52+03:00 - DeleteMedia called
+[INFO] - 2025-02-19T17:11:54+03:00 - Successfully deleted media
+[INFO] - 2025-02-19T17:22:22+03:00 - SaveMedia called
+[INFO] - 2025-02-19T17:22:22+03:00 - SaveMedia called
+[INFO] - 2025-02-19T17:22:22+03:00 - Creating media
+[INFO] - 2025-02-19T17:22:24+03:00 - Media created successfully
+[INFO] - 2025-02-19T17:30:56+03:00 - UpdateMedia called
+[INFO] - 2025-02-19T17:30:56+03:00 - UpdateMedia called
+[INFO] - 2025-02-19T17:30:57+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T17:30:57+03:00 - Existing media found for update
+[INFO] - 2025-02-19T17:30:57+03:00 - Updating media fields
+[INFO] - 2025-02-19T17:30:57+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T17:30:57+03:00 - Successfully updated media
+[INFO] - 2025-02-19T17:30:57+03:00 - Media updated successfully
+[INFO] - 2025-02-19T17:33:08+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T17:33:08+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T17:33:08+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T17:36:03+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T17:36:03+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T17:36:04+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T17:36:04+03:00 - Closing database connection
+[INFO] - 2025-02-19T17:36:04+03:00 - Database connection closed
+[INFO] - 2025-02-19T17:36:04+03:00 - Shutdown complete
+[INFO] - 2025-02-19T17:36:04+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T17:41:26+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T17:41:26+03:00 - gRPC server listening
+[INFO] - 2025-02-19T17:42:01+03:00 - SaveMedia called
+[INFO] - 2025-02-19T17:42:01+03:00 - SaveMedia called
+[INFO] - 2025-02-19T17:42:01+03:00 - Creating media
+[INFO] - 2025-02-19T17:42:01+03:00 - Media created successfully
+[INFO] - 2025-02-19T17:43:02+03:00 - UpdateMedia called
+[INFO] - 2025-02-19T17:43:02+03:00 - UpdateMedia called
+[INFO] - 2025-02-19T17:43:02+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T17:43:03+03:00 - Existing media found for update
+[INFO] - 2025-02-19T17:43:03+03:00 - Updating media fields
+[INFO] - 2025-02-19T17:43:03+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T17:43:03+03:00 - Successfully updated media
+[INFO] - 2025-02-19T17:43:03+03:00 - Media updated successfully
+[INFO] - 2025-02-19T17:43:24+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T17:43:24+03:00 - GetMediaByID called
+[INFO] - 2025-02-19T17:43:24+03:00 - Media retrieved successfully
+[INFO] - 2025-02-19T17:43:34+03:00 - DeleteMedia called
+[INFO] - 2025-02-19T17:43:34+03:00 - DeleteMedia called
+[INFO] - 2025-02-19T17:43:35+03:00 - Successfully deleted media
+[INFO] - 2025-02-19T17:58:42+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T17:58:42+03:00 - SearchKinopoisk called
+[ERROR] - 2025-02-19T17:58:43+03:00 - Failed to search Kinopoisk
+[ERROR] - 2025-02-19T17:58:43+03:00 - Failed to search Kinopoisk
+[INFO] - 2025-02-19T18:04:21+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T18:04:21+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T18:04:21+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T18:04:21+03:00 - Closing database connection
+[INFO] - 2025-02-19T18:04:21+03:00 - Database connection closed
+[INFO] - 2025-02-19T18:04:21+03:00 - Shutdown complete
+[INFO] - 2025-02-19T18:04:21+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T18:04:21+03:00 - Server exited properly
+[INFO] - 2025-02-19T18:04:21+03:00 - Closing database connection
+[INFO] - 2025-02-19T18:04:21+03:00 - Database connection closed
+[INFO] - 2025-02-19T18:04:28+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T18:04:28+03:00 - gRPC server listening
+[INFO] - 2025-02-19T18:04:41+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T18:04:41+03:00 - SearchKinopoisk called
+[ERROR] - 2025-02-19T18:04:42+03:00 - Failed to search Kinopoisk
+[ERROR] - 2025-02-19T18:04:42+03:00 - Failed to search Kinopoisk
+[INFO] - 2025-02-19T18:07:51+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T18:07:51+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T18:07:51+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T18:07:51+03:00 - Closing database connection
+[INFO] - 2025-02-19T18:07:51+03:00 - Database connection closed
+[INFO] - 2025-02-19T18:07:51+03:00 - Shutdown complete
+[INFO] - 2025-02-19T18:07:51+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T18:07:51+03:00 - Server exited properly
+[INFO] - 2025-02-19T18:07:51+03:00 - Closing database connection
+[INFO] - 2025-02-19T18:07:51+03:00 - Database connection closed
+[INFO] - 2025-02-19T18:11:50+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T18:11:50+03:00 - gRPC server listening
+[INFO] - 2025-02-19T18:11:59+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T18:11:59+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T18:12:00+03:00 - Kinopoisk API Response
+[INFO] - 2025-02-19T18:21:38+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T18:21:38+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T18:21:38+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T18:21:40+03:00 - Kinopoisk API Response
+[INFO] - 2025-02-19T18:21:40+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-19T18:54:24+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T18:54:24+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T18:54:24+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T18:54:24+03:00 - Closing database connection
+[INFO] - 2025-02-19T18:54:24+03:00 - Database connection closed
+[INFO] - 2025-02-19T18:54:24+03:00 - Shutdown complete
+[INFO] - 2025-02-19T18:54:24+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T18:56:22+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T18:56:22+03:00 - gRPC server listening
+[INFO] - 2025-02-19T18:57:03+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T18:57:03+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T18:57:03+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T18:57:05+03:00 - Kinopoisk API Response
+[INFO] - 2025-02-19T18:57:05+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-19T19:54:29+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T19:54:29+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T19:54:29+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T19:54:29+03:00 - Closing database connection
+[INFO] - 2025-02-19T19:54:29+03:00 - Database connection closed
+[INFO] - 2025-02-19T19:55:34+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T19:55:34+03:00 - gRPC server listening
+[INFO] - 2025-02-19T19:56:00+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T19:56:00+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T19:56:00+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T19:56:01+03:00 - Kinopoisk API Response
+[INFO] - 2025-02-19T19:56:02+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-19T19:57:16+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T19:57:16+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T19:57:16+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T19:57:17+03:00 - Kinopoisk API Response
+[INFO] - 2025-02-19T19:57:18+03:00 - Medias retrieved successfully
+[INFO] - 2025-02-19T20:32:18+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T20:32:18+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T20:32:18+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T20:32:18+03:00 - Closing database connection
+[INFO] - 2025-02-19T20:32:18+03:00 - Database connection closed
+[INFO] - 2025-02-19T20:32:18+03:00 - Shutdown complete
+[INFO] - 2025-02-19T20:32:18+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T20:32:18+03:00 - Server exited properly
+[INFO] - 2025-02-19T20:32:29+03:00 - Starting gRPC server
+[INFO] - 2025-02-19T20:32:29+03:00 - gRPC server listening
+[INFO] - 2025-02-19T20:32:49+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T20:32:49+03:00 - GetMediasByName called
+[INFO] - 2025-02-19T20:32:49+03:00 - SearchKinopoisk called
+[INFO] - 2025-02-19T20:32:51+03:00 - Kinopoisk API Response
+[INFO] - 2025-02-19T20:32:51+03:00 - Medias retrieved successfully
+[ERROR] - 2025-02-19T20:32:52+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:52+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:52+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:53+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:53+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:53+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:53+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:53+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:53+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:53+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:53+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:53+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:53+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:54+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:54+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:55+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:55+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:55+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:55+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:55+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:55+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:55+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:55+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:56+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:56+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:56+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:56+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:56+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:56+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:56+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:57+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:57+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:57+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:57+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:57+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:58+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:58+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:58+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:58+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:58+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:58+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:58+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:58+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:59+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:59+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:59+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:59+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:59+03:00 - Creating media
+[INFO] - 2025-02-19T20:32:59+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:32:59+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:32:59+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:32:59+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:32:59+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:00+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:00+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:00+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:00+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:00+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:01+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:01+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:01+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:01+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:01+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:01+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:01+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:02+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:02+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:02+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:02+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:02+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:02+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:02+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:02+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:03+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:03+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:03+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:03+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:03+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:03+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:03+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:03+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:03+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:03+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:04+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:04+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:04+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:04+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:04+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:04+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:04+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:05+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:05+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:05+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:05+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:05+03:00 - Media from Kinopoisk saved successfully
+[ERROR] - 2025-02-19T20:33:05+03:00 - Failed to get media by ID
+[INFO] - 2025-02-19T20:33:05+03:00 - Saving media from Kinopoisk
+[INFO] - 2025-02-19T20:33:05+03:00 - Creating media
+[INFO] - 2025-02-19T20:33:06+03:00 - Media created successfully
+[INFO] - 2025-02-19T20:33:06+03:00 - Media from Kinopoisk saved successfully
+[INFO] - 2025-02-19T20:34:10+03:00 - Received shutdown signal
+[INFO] - 2025-02-19T20:34:10+03:00 - Stopping gRPC server gracefully
+[INFO] - 2025-02-19T20:34:10+03:00 - gRPC server stopped gracefully
+[INFO] - 2025-02-19T20:34:10+03:00 - Closing database connection
+[INFO] - 2025-02-19T20:34:10+03:00 - Database connection closed
+[INFO] - 2025-02-19T20:34:10+03:00 - Shutdown complete
+[INFO] - 2025-02-19T20:34:10+03:00 - Graceful shutdown completed
+[INFO] - 2025-02-19T20:34:10+03:00 - Server exited properly
+[INFO] - 2025-02-19T20:34:10+03:00 - Closing database connection
+[INFO] - 2025-02-19T20:34:10+03:00 - Database connection closed

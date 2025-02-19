@@ -2,12 +2,13 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"log/slog"
 	"strings"
 
 	"github.com/watchlist-kata/protos/media"
 	"gorm.io/gorm"
-	"log/slog"
 )
 
 // Repository определяет интерфейс для репозитория
@@ -16,6 +17,7 @@ type Repository interface {
 	GetMediasByNameFromRepo(ctx context.Context, name string) ([]*media.Media, error)
 	CreateMedia(ctx context.Context, media *media.Media) (*media.Media, error)
 	UpdateMedia(ctx context.Context, media *media.Media) (*media.Media, error)
+	DeleteMedia(ctx context.Context, id int64) (*media.DeleteMediaResponse, error)
 }
 
 // PostgresRepository представляет собой реализацию репозитория для PostgreSQL
@@ -46,14 +48,18 @@ func (r *PostgresRepository) GetMediaByID(ctx context.Context, id int64) (*media
 		return nil, err
 	}
 
-	var m media.Media
-	err := r.db.WithContext(ctx).First(&m, id).Error
+	var gormMedia GormMedia
+	err := r.db.WithContext(ctx).First(&gormMedia, id).Error
 	if err != nil {
 		r.logger.ErrorContext(ctx, "Failed to get media by ID", "id", id, "error", err)
 		return nil, fmt.Errorf("failed to get media with id %d: %w", id, err)
 	}
-	r.logger.InfoContext(ctx, "Media retrieved successfully", "id", id, "title", m.Title)
-	return &m, nil
+
+	// Преобразование GormMedia в *media.Media
+	m := convertGormMediaToProtoMedia(&gormMedia)
+
+	r.logger.InfoContext(ctx, "Media retrieved successfully", "id", id, "name_en", m.NameEn)
+	return m, nil
 }
 
 // GetMediasByNameFromRepo получает список медиа по названию
@@ -62,12 +68,18 @@ func (r *PostgresRepository) GetMediasByNameFromRepo(ctx context.Context, name s
 		return nil, err
 	}
 
-	var medias []*media.Media
-	query := r.db.WithContext(ctx).Where("lower(title) LIKE ? OR lower(title_ru) LIKE ?", "%"+strings.ToLower(name)+"%", "%"+strings.ToLower(name)+"%")
-	result := query.Find(&medias)
+	var gormMedias []GormMedia
+	query := r.db.WithContext(ctx).Where("lower(name_en) LIKE ? OR lower(name_ru) LIKE ?", "%"+strings.ToLower(name)+"%", "%"+strings.ToLower(name)+"%")
+	result := query.Find(&gormMedias)
 	if result.Error != nil {
 		r.logger.ErrorContext(ctx, "Failed to get medias by name", "name", name, "error", result.Error)
 		return nil, fmt.Errorf("failed to get medias with name %s: %w", name, result.Error)
+	}
+
+	var medias []*media.Media
+	for _, gormMedia := range gormMedias {
+		m := convertGormMediaToProtoMedia(&gormMedia)
+		medias = append(medias, m)
 	}
 
 	r.logger.InfoContext(ctx, "Medias retrieved successfully", "name", name, "count", len(medias))
@@ -80,68 +92,117 @@ func (r *PostgresRepository) CreateMedia(ctx context.Context, media *media.Media
 		return nil, err
 	}
 
-	r.logger.InfoContext(ctx, "Creating media", "media_tmdb_id", media.TmdbId, "media_title", media.Title)
-	result := r.db.WithContext(ctx).Create(media)
+	gormMedia := convertProtoMediaToGormMedia(media)
+
+	r.logger.InfoContext(ctx, "Creating media", "media_kinopoisk_id", gormMedia.KinopoiskID, "media_name_en", gormMedia.NameEn)
+	result := r.db.WithContext(ctx).Create(&gormMedia)
 	if err := result.Error; err != nil {
-		r.logger.ErrorContext(ctx, "Failed to create media", "media_tmdb_id", media.TmdbId, "media_title", media.Title, "error", err)
-		return nil, fmt.Errorf("failed to create media with tmdb_id %d: %w", media.TmdbId, err)
+		r.logger.ErrorContext(ctx, "Failed to create media", "media_kinopoisk_id", gormMedia.KinopoiskID, "media_name_en", gormMedia.NameEn, "error", err)
+		return nil, fmt.Errorf("failed to create media with kinopoisk_id %d: %w", gormMedia.KinopoiskID, err)
 	}
 
-	r.logger.InfoContext(ctx, "Media created successfully", "media_tmdb_id", media.TmdbId, "media_title", media.Title)
-	return media, nil
+	createdMedia := convertGormMediaToProtoMedia(&gormMedia)
+
+	r.logger.InfoContext(ctx, "Media created successfully", "media_kinopoisk_id", gormMedia.KinopoiskID, "media_name_en", gormMedia.NameEn)
+	return createdMedia, nil
 }
 
 // UpdateMedia обновляет данные медиа по его ID
 func (r *PostgresRepository) UpdateMedia(ctx context.Context, media *media.Media) (*media.Media, error) {
-	// Проверка на отмену контекста
 	if err := r.checkContextCancelled(ctx, "UpdateMedia", map[string]interface{}{"id": media.Id}); err != nil {
 		return nil, err
 	}
 
-	// Поиск существующего медиа
 	var existingMedia GormMedia
 	if err := r.db.WithContext(ctx).First(&existingMedia, media.Id).Error; err != nil {
 		r.logger.ErrorContext(ctx, "Failed to get media by ID", "id", media.Id, "error", err)
 		return nil, fmt.Errorf("failed to get media with id %d: %w", media.Id, err)
 	}
 
-	// Логируем существующее медиа перед обновлением
-	r.logger.InfoContext(ctx, "Existing media found for update", "id", media.Id, "existing_tmdb_id", existingMedia.TmdbID, "existing_title", existingMedia.Title)
+	r.logger.InfoContext(ctx,
+		"Existing media found for update",
+		map[string]interface{}{
+			"id":                    media.Id,
+			"existing_kinopoisk_id": existingMedia.KinopoiskID,
+			"existing_name_en":      existingMedia.NameEn,
+			"existing_name_ru":      existingMedia.NameRu,
+		})
 
-	// Если tmdb_id в запросе отличается от tmdb_id в базе данных, возвращаем ошибку
-	if media.TmdbId != existingMedia.TmdbID {
-		r.logger.ErrorContext(ctx, "tmdb_id mismatch", "id", media.Id, "request_tmdb_id", media.TmdbId, "db_tmdb_id", existingMedia.TmdbID)
-		return nil, fmt.Errorf("tmdb_id mismatch: cannot update media with a different tmdb_id")
+	if media.KinopoiskId != existingMedia.KinopoiskID {
+		r.logger.ErrorContext(ctx,
+			"kinopoisk_id mismatch",
+			map[string]interface{}{
+				"id":                   media.Id,
+				"request_kinopoisk_id": media.KinopoiskId,
+				"db_kinopoisk_id":      existingMedia.KinopoiskID,
+			})
+		return nil,
+			fmt.Errorf("kinopoisk_id mismatch: cannot update media with a different kinopoisk_id")
 	}
 
-	// Обновляем поля медиа (кроме id и tmdb_id)
+	gormUpdates := convertProtoMediaToGormMedia(media)
+
 	updates := map[string]interface{}{
-		"type":           media.Type,
-		"title":          media.Title,
-		"title_ru":       media.TitleRu,
-		"description":    media.Description,
-		"description_ru": media.DescriptionRu,
-		"release_date":   media.ReleaseDate,
-		"poster":         media.Poster,
+		"type":        gormUpdates.Type,
+		"name_en":     gormUpdates.NameEn,
+		"name_ru":     gormUpdates.NameRu,
+		"description": gormUpdates.Description,
+		"year":        gormUpdates.Year,
+		"poster":      gormUpdates.Poster,
+		"countries":   gormUpdates.Countries,
+		"genres":      gormUpdates.Genres,
 	}
 
-	// Логируем обновляемые поля
-	r.logger.InfoContext(ctx, "Updating media fields", "id", media.Id, "updated_fields", updates)
+	r.logger.InfoContext(ctx, "Updating media fields", map[string]interface{}{
+		"id":             media.Id,
+		"updated_fields": updates,
+	})
 
-	// Обновляем медиа в базе данных
 	if err := r.db.WithContext(ctx).Model(&existingMedia).Updates(updates).Error; err != nil {
-		r.logger.ErrorContext(ctx, "Failed to update media", "id", media.Id, "error", err)
+		r.logger.ErrorContext(ctx, "Failed to update media", map[string]interface{}{
+			"id":    media.Id,
+			"error": err,
+		})
 		return nil, fmt.Errorf("failed to update media with id %d: %w", media.Id, err)
 	}
 
-	// Возвращаем обновлённое медиа напрямую из базы
 	updatedMedia, err := r.GetMediaByID(ctx, media.Id)
 	if err != nil {
 		return nil, fmt.Errorf("failed to retrieve updated media with id %d: %w", media.Id, err)
 	}
 
-	// Логируем успешное обновление
-	r.logger.InfoContext(ctx, "Successfully updated media", "id", media.Id, "tmdb_id", updatedMedia.TmdbId, "updated_title", updatedMedia.Title)
+	r.logger.InfoContext(ctx, "Successfully updated media", map[string]interface{}{
+		"id":              updatedMedia.Id,
+		"kinopoisk_id":    updatedMedia.KinopoiskId,
+		"updated_name_en": updatedMedia.NameEn,
+		"updated_name_ru": updatedMedia.NameRu,
+	})
 
 	return updatedMedia, nil
+}
+
+// DeleteMedia удаляет медиа по его ID
+func (r *PostgresRepository) DeleteMedia(ctx context.Context, id int64) (*media.DeleteMediaResponse, error) {
+	if err := r.checkContextCancelled(ctx, "DeleteMedia", map[string]interface{}{"id": id}); err != nil {
+		return nil, err
+	}
+
+	var existingMedia GormMedia
+	if err := r.db.WithContext(ctx).First(&existingMedia, id).Error; err != nil {
+		r.logger.ErrorContext(ctx, "Failed to find media by ID", "id", id, "error", err)
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return &media.DeleteMediaResponse{Success: false}, nil // Если медиа не найдено, возвращаем успешный ответ, так как ничего удалять не нужно
+		}
+		return nil, fmt.Errorf("failed to find media with id %d: %w", id, err)
+	}
+
+	// Удаляем медиа из базы данных
+	if err := r.db.WithContext(ctx).Delete(&existingMedia).Error; err != nil {
+		r.logger.ErrorContext(ctx, "Failed to delete media", "id", id, "error", err)
+		return nil, fmt.Errorf("failed to delete media with id %d: %w", id, err)
+	}
+
+	r.logger.InfoContext(ctx, "Successfully deleted media", map[string]interface{}{"id": id})
+
+	return &media.DeleteMediaResponse{Success: true}, nil
 }
