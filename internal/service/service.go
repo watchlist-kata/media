@@ -5,6 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
+	"reflect"
+	"sync"
+	"time"
 
 	"github.com/watchlist-kata/media/internal/config"
 	"github.com/watchlist-kata/media/internal/kinopoisk"
@@ -29,12 +32,14 @@ type MediaService struct {
 	logger          *slog.Logger
 	cfg             *config.Config
 	kinopoiskClient *kinopoisk.KPClient
+	wg              sync.WaitGroup
+	retryCount      int
+	retryInterval   time.Duration
 }
 
 // NewMediaService создает новый экземпляр MediaService
 func NewMediaService(repo repository.Repository, logger *slog.Logger, cfg *config.Config) (Service, error) {
-	// Инициализация KinopoiskClient с API-ключом и логгером
-	kinopoiskAPIKey := cfg.KinopoiskAPIKey // Получаем API ключ из конфигурации
+	kinopoiskAPIKey := cfg.KinopoiskAPIKey
 	kinopoiskClient, err := kinopoisk.NewKinopoiskClient(kinopoiskAPIKey, logger)
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize Kinopoisk client: %w", err)
@@ -45,6 +50,8 @@ func NewMediaService(repo repository.Repository, logger *slog.Logger, cfg *confi
 		logger:          logger,
 		cfg:             cfg,
 		kinopoiskClient: kinopoiskClient,
+		retryCount:      3,
+		retryInterval:   2 * time.Second,
 	}, nil
 }
 
@@ -53,22 +60,54 @@ var _ Service = (*MediaService)(nil)
 
 // GetMediaByID получает медиа по его ID
 func (s *MediaService) GetMediaByID(ctx context.Context, req *media.GetMediaByIDRequest) (*media.Media, error) {
+	if req == nil {
+		return nil, fmt.Errorf("invalid request: nil pointer")
+	}
+
+	if req.Id <= 0 {
+		return nil, fmt.Errorf("invalid ID: must be positive")
+	}
+
 	s.logger.InfoContext(ctx, "GetMediaByID called", "id", req.Id)
+
+	select {
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	default:
+	}
+
 	m, err := s.repo.GetMediaByID(ctx, req.Id)
 	if err != nil {
 		return nil, s.handleError(ctx, "Failed to GetMediaByID", fmt.Errorf("failed to get media with id %d: %w", req.Id, err), "id", req.Id, "error", err)
 	}
+
+	s.logger.InfoContext(ctx, "GetMediaByID successful", "id", req.Id)
 	return m, nil
 }
 
 // GetMediasByName получает медиа по названию
 func (s *MediaService) GetMediasByName(ctx context.Context, req *media.GetMediasByNameRequest) (*media.MediaList, error) {
+	if req == nil {
+		return nil, fmt.Errorf("invalid request: nil pointer")
+	}
+
+	if req.Name == "" {
+		return nil, fmt.Errorf("invalid name: cannot be empty")
+	}
+
 	s.logger.InfoContext(ctx, "GetMediasByName called", "name", req.Name)
+
+	select {
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	default:
+	}
 
 	// 1. Поиск медиа в Кинопоиске
 	kinopoiskMedias, err := s.SearchKinopoisk(ctx, req.Name)
 	if err != nil {
 		s.logger.ErrorContext(ctx, "Failed to search Kinopoisk", "name", req.Name, "error", err)
+		return nil, s.handleError(ctx, "Failed to search Kinopoisk", fmt.Errorf("failed to search Kinopoisk: %w", err), "name", req.Name, "error", err)
 	}
 
 	// 2. Получение медиа из локальной базы данных
@@ -81,54 +120,92 @@ func (s *MediaService) GetMediasByName(ctx context.Context, req *media.GetMedias
 	var mediaPointers []*media.Media
 	mediaMap := make(map[int64]*media.Media)
 
-	addMedia := func(m *media.Media) {
+	// Сначала добавляем локальные медиа
+	for _, m := range localMedias {
 		if _, exists := mediaMap[m.KinopoiskId]; !exists {
 			mediaPointers = append(mediaPointers, m)
 			mediaMap[m.KinopoiskId] = m
 		}
 	}
 
-	for _, m := range localMedias {
-		addMedia(m)
-	}
-
+	// Сохраняем/обновляем и добавляем медиа из Кинопоиска
 	for _, kpMedia := range kinopoiskMedias {
-		addMedia(kpMedia)
-	}
-
-	// 4. Асинхронное сохранение и обновление медиа
-	go func() {
-		for _, m := range mediaPointers {
-			existingMedia, err := s.repo.GetMediaByID(context.Background(), m.KinopoiskId)
+		// Проверяем, есть ли уже такое медиа в результатах
+		if existingMedia, exists := mediaMap[kpMedia.KinopoiskId]; !exists {
+			// Если нет в результатах - проверяем в БД
+			dbMedia, err := s.repo.GetMediaByKinopoiskID(ctx, kpMedia.KinopoiskId)
 			if err != nil {
-				if errors.Is(err, gorm.ErrRecordNotFound) {
+				if errors.Is(err, repository.ErrMediaNotFound) {
 					// Медиа нет в базе - сохраняем его
-					s.logger.InfoContext(context.Background(), "Saving media from Kinopoisk", "kinopoiskID", m.KinopoiskId)
-					_, err := s.repo.CreateMedia(context.Background(), m)
-					if err != nil {
-						s.logger.ErrorContext(context.Background(), "Failed to save media from Kinopoisk", "kinopoiskID", m.KinopoiskId, "error", err)
+					s.logger.InfoContext(ctx, "Saving media from Kinopoisk", "kinopoiskID", kpMedia.KinopoiskId)
+					// Заполняем поля времени перед сохранением
+					kpMedia.CreatedAt = time.Now().Format(time.RFC3339)
+					kpMedia.UpdatedAt = time.Now().Format(time.RFC3339)
+					savedMedia, saveErr := s.repo.CreateMedia(ctx, kpMedia)
+					if saveErr != nil {
+						s.logger.ErrorContext(ctx, "Failed to save media from Kinopoisk", "kinopoiskID", kpMedia.KinopoiskId, "error", saveErr)
+						mediaPointers = append(mediaPointers, kpMedia) // Даже если не удалось сохранить, добавляем в результаты
 					} else {
-						s.logger.InfoContext(context.Background(), "Media from Kinopoisk saved successfully", "kinopoiskID", m.KinopoiskId)
+						s.logger.InfoContext(ctx, "Media from Kinopoisk saved successfully", "kinopoiskID", kpMedia.KinopoiskId)
+						mediaPointers = append(mediaPointers, savedMedia)
 					}
 				} else {
-					s.logger.ErrorContext(context.Background(), "Failed to check existing media in DB", "kinopoiskID", m.KinopoiskId, "error", err)
+					s.logger.ErrorContext(ctx, "Failed to check existing media in DB", "kinopoiskID", kpMedia.KinopoiskId, "error", err)
+					mediaPointers = append(mediaPointers, kpMedia) // Добавляем несмотря на ошибку
 				}
+				mediaMap[kpMedia.KinopoiskId] = kpMedia
 			} else {
-				// Если медиа существует - проверяем на необходимость обновления
-				if needsUpdate(existingMedia, m) {
-					s.logger.InfoContext(context.Background(), "Updating media from Kinopoisk", "kinopoiskID", m.KinopoiskId)
-					_, err := s.repo.UpdateMedia(context.Background(), m)
-					if err != nil {
-						s.logger.ErrorContext(context.Background(), "Failed to update media from Kinopoisk", "kinopoiskID", m.KinopoiskId, "error", err)
+				// Медиа есть в БД, но не в текущих результатах
+				if needsUpdate(dbMedia, kpMedia) {
+					s.logger.InfoContext(ctx, "Updating media from Kinopoisk", "kinopoiskID", kpMedia.KinopoiskId)
+					updatedMedia, updateErr := s.repo.UpdateMedia(ctx, kpMedia)
+					if updateErr != nil {
+						s.logger.ErrorContext(ctx, "Failed to update media from Kinopoisk", "kinopoiskID", kpMedia.KinopoiskId, "error", updateErr)
+						mediaPointers = append(mediaPointers, dbMedia)
 					} else {
-						s.logger.InfoContext(context.Background(), "Media from Kinopoisk updated successfully", "kinopoiskID", m.KinopoiskId)
+						s.logger.InfoContext(ctx, "Media updated successfully", "kinopoiskID", kpMedia.KinopoiskId)
+						mediaPointers = append(mediaPointers, updatedMedia)
+					}
+				} else {
+					// Обновление не требуется, используем версию из БД
+					mediaPointers = append(mediaPointers, dbMedia)
+				}
+				mediaMap[kpMedia.KinopoiskId] = kpMedia
+			}
+		} else {
+			// Если медиа уже есть в результатах, проверяем, нужно ли обновить
+			if needsUpdate(existingMedia, kpMedia) {
+				// Обновляем существующее медиа данными из Кинопоиска
+				s.logger.InfoContext(ctx, "Updating media with Kinopoisk data", "kinopoiskID", kpMedia.KinopoiskId)
+
+				// Если у медиа есть ID в базе, обновляем через репозиторий
+				if existingMedia.Id > 0 {
+					kpMedia.Id = existingMedia.Id // Сохраняем ID из БД
+					updatedMedia, updateErr := s.repo.UpdateMedia(ctx, kpMedia)
+					if updateErr != nil {
+						s.logger.ErrorContext(ctx, "Failed to update existing media", "kinopoiskID", kpMedia.KinopoiskId, "error", updateErr)
+					} else {
+						// Заменяем медиа в результатах
+						for i, m := range mediaPointers {
+							if m.KinopoiskId == updatedMedia.KinopoiskId {
+								mediaPointers[i] = updatedMedia
+								break
+							}
+						}
+						mediaMap[kpMedia.KinopoiskId] = updatedMedia
 					}
 				}
 			}
 		}
-	}()
+	}
 
-	return &media.MediaList{Medias: mediaPointers}, nil
+	// Формируем итоговый ответ
+	result := &media.MediaList{
+		Medias: mediaPointers,
+	}
+
+	s.logger.InfoContext(ctx, "GetMediasByName successful", "totalMedias", len(result.Medias))
+	return result, nil
 }
 
 // SearchKinopoisk ищет медиа в Кинопоиске.
@@ -140,12 +217,27 @@ func (s *MediaService) SearchKinopoisk(ctx context.Context, name string) ([]*med
 		return nil, s.handleError(ctx, "Failed to search Kinopoisk", fmt.Errorf("failed to search Kinopoisk: %w", err), "error", err)
 	}
 
+	// Возвращаем пустой срез вместо nil
+	if medias == nil {
+		return []*media.Media{}, nil
+	}
+
 	return medias, nil
 }
 
 // SaveMedia сохраняет новое медиа
 func (s *MediaService) SaveMedia(ctx context.Context, req *media.SaveMediaRequest) (*media.Media, error) {
 	s.logger.InfoContext(ctx, "SaveMedia called", "kinopoiskID", req.Media.KinopoiskId)
+
+	// Базовая валидация входных данных
+	if req.Media == nil {
+		return nil, fmt.Errorf("invalid request: nil media")
+	}
+
+	if req.Media.KinopoiskId <= 0 {
+		return nil, fmt.Errorf("invalid kinopoiskID: must be greater than 0")
+	}
+
 	newMedia, err := s.repo.CreateMedia(ctx, req.Media)
 	if err != nil {
 		s.logger.ErrorContext(ctx, "Failed to SaveMedia", "kinopoiskID", req.Media.KinopoiskId, "error", err)
@@ -157,6 +249,11 @@ func (s *MediaService) SaveMedia(ctx context.Context, req *media.SaveMediaReques
 // UpdateMedia обновляет существующее медиа
 func (s *MediaService) UpdateMedia(ctx context.Context, m *media.Media) (*media.Media, error) {
 	s.logger.InfoContext(ctx, "UpdateMedia called", "kinopoiskID", m.KinopoiskId)
+
+	// Базовая валидация входных данных
+	if m.Id <= 0 {
+		return nil, fmt.Errorf("invalid media ID: must be greater than 0")
+	}
 
 	existingMedia, err := s.repo.GetMediaByID(ctx, m.Id)
 	if err != nil {
@@ -173,6 +270,7 @@ func (s *MediaService) UpdateMedia(ctx context.Context, m *media.Media) (*media.
 		return existingMedia, nil // Возвращаем существующую запись, так как обновлять нечего
 	}
 
+	s.logger.InfoContext(ctx, "Updating media", "mediaID", m.Id)
 	updatedMedia, err := s.repo.UpdateMedia(ctx, m)
 	if err != nil {
 		return nil, s.handleError(ctx, "Failed to UpdateMedia in repository", fmt.Errorf("failed to update media with id %d in repository: %w", m.Id, err), "mediaID", m.Id, "error", err)
@@ -186,8 +284,17 @@ func (s *MediaService) UpdateMedia(ctx context.Context, m *media.Media) (*media.
 func (s *MediaService) DeleteMedia(ctx context.Context, req *media.DeleteMediaRequest) (*media.DeleteMediaResponse, error) {
 	s.logger.InfoContext(ctx, "DeleteMedia called", "id", req.Id)
 
+	// Базовая валидация входных данных
+	if req.Id <= 0 {
+		return nil, fmt.Errorf("invalid media ID: must be greater than 0")
+	}
+
 	resp, err := s.repo.DeleteMedia(ctx, req.Id)
 	if err != nil {
+		// Проверяем, является ли это ошибкой "запись не найдена"
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, fmt.Errorf("media with id %d not found", req.Id)
+		}
 		return nil, s.handleError(ctx, "Failed to DeleteMedia", fmt.Errorf("failed to delete media with id %d: %w", req.Id, err), "id", req.Id, "error", err)
 	}
 
@@ -200,11 +307,12 @@ func (s *MediaService) handleError(ctx context.Context, message string, err erro
 	return fmt.Errorf("%s: %w", message, err)
 }
 
-// needsUpdate проверяет, нужно ли обновлять информацию о медиа
+// Улучшенная версия needsUpdate с правильным сравнением срезов
 func needsUpdate(existingMedia, newMedia *media.Media) bool {
 	if existingMedia == nil || newMedia == nil {
-		return true // Если хотя бы одна из записей отсутствует, считаем, что нужно обновить
+		return true
 	}
+
 	return existingMedia.KinopoiskId != newMedia.KinopoiskId ||
 		existingMedia.Type != newMedia.Type ||
 		existingMedia.NameEn != newMedia.NameEn ||
@@ -212,6 +320,6 @@ func needsUpdate(existingMedia, newMedia *media.Media) bool {
 		existingMedia.Description != newMedia.Description ||
 		existingMedia.Year != newMedia.Year ||
 		existingMedia.Poster != newMedia.Poster ||
-		existingMedia.Countries != newMedia.Countries ||
-		existingMedia.Genres != newMedia.Genres
+		!reflect.DeepEqual(existingMedia.Countries, newMedia.Countries) ||
+		!reflect.DeepEqual(existingMedia.Genres, newMedia.Genres)
 }
